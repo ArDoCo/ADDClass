@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -5,22 +6,21 @@
     <artifactId>parent</artifactId>
     <version>0.3-SNAPSHOT</version>
   </parent>
-  
+
   <artifactId>ADDClass</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${revision}</version>
   <name>Architectural Design Decision Classification</name>
   <description>Classifies Architectural Design Decision</description>
-  
+
   <properties>
-  	<eclipse-collections.version>11.0.0</eclipse-collections.version>
+    <eclipse-collections.version>11.0.0</eclipse-collections.version>
     <log4j.version>2.17.1</log4j.version>
     <spotless.version>2.19.2</spotless.version>
     <error-prone.version>2.10.0</error-prone.version>
 
     <argLine>-Xmx4g -Xss256m</argLine>
   </properties>
-  
-  
+
   <dependencies>
     <!-- Eclipse collections -->
     <dependency>
@@ -45,9 +45,8 @@
       <version>${log4j.version}</version>
     </dependency>
   </dependencies>
-  
-  
-<build>
+
+  <build>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -175,6 +174,6 @@
         </plugins>
       </build>
     </profile>
-  </profiles>  
+  </profiles>
 
 </project>

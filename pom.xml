@@ -13,7 +13,7 @@
   <description>Classifies Architectural Design Decision</description>
 
   <properties>
-  	<deeplearning4j.version>1.0.0-M1.1</deeplearning4j.version>
+    <deeplearning4j.version>1.0.0-M1.1</deeplearning4j.version>
     <eclipse-collections.version>11.0.0</eclipse-collections.version>
     <log4j.version>2.17.1</log4j.version>
     <spotless.version>2.20.0</spotless.version>
@@ -47,25 +47,25 @@
     </dependency>
     <!-- Deeplearning4j -->
     <dependency>
-	  <groupId>org.deeplearning4j</groupId>
-	  <artifactId>deeplearning4j-core</artifactId>
-	  <version>${deeplearning4j.version}</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.deeplearning4j</groupId>
-	  <artifactId>deeplearning4j-nlp</artifactId>
-	  <version>${deeplearning4j.version}</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.datavec</groupId>
-	  <artifactId>datavec-data-image</artifactId>
-	  <version>${deeplearning4j.version}</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.nd4j</groupId>
-	  <artifactId>nd4j-native-platform</artifactId>
-	  <version>${deeplearning4j.version}</version>
-	</dependency>
+      <groupId>org.deeplearning4j</groupId>
+      <artifactId>deeplearning4j-core</artifactId>
+      <version>${deeplearning4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.deeplearning4j</groupId>
+      <artifactId>deeplearning4j-nlp</artifactId>
+      <version>${deeplearning4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.datavec</groupId>
+      <artifactId>datavec-data-image</artifactId>
+      <version>${deeplearning4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.nd4j</groupId>
+      <artifactId>nd4j-native-platform</artifactId>
+      <version>${deeplearning4j.version}</version>
+    </dependency>
   </dependencies>
 
   <repositories>

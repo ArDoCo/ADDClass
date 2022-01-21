@@ -1,3 +1,4 @@
+/* Licensed under MIT 2022. */
 package edu.kit.kastel.mcse.ardoco.addclass;
 
 import static edu.kit.kastel.mcse.ardoco.addclass.ArchitecturalDesignDecision.ARRANGEMENT_DECISION;

@@ -6,6 +6,11 @@ import java.util.List;
 import org.eclipse.collections.api.factory.Lists;
 
 /**
+ * This enum represents the taxonomy of Architectural Design Decisions. It contains certain methods to get ancestors and
+ * the level within the taxonomy. Also contains a function to check if an ADD is a subcategory/subclass of another ADD.
+ * This is helfpul if you want to look only at certain categories and need to merge the subclasses to its
+ * parents/ancestors.
+ *
  * @author Jan Keim
  *
  */
@@ -53,6 +58,16 @@ public enum ArchitecturalDesignDecision {
         this.parent = parent;
     }
 
+    /**
+     * Checks if the calling class is contained in another {@link ArchitecturalDesignDecision} based on the hierarchy.
+     * Here, we assume that a class also contains itself. This means, for example, that every class except
+     * {@value #NO_DESIGN_DECISION} is contained in {@value #DESIGN_DECISION} and nothing is contained in
+     * {@value #NO_DESIGN_DECISION} (except itself). Basically, this method checks if the shortest path from the caller
+     * to {@value #DESIGN_DECISION} contains the given class (= is an ancestor).
+     *
+     * @param other the other {@link ArchitecturalDesignDecision} that may contain this
+     * @return if the other {@link ArchitecturalDesignDecision} is an ancestor.
+     */
     public boolean isContainedIn(ArchitecturalDesignDecision other) {
         if (other == this) {
             return true;
@@ -67,6 +82,12 @@ public enum ArchitecturalDesignDecision {
         return false;
     }
 
+    /**
+     * Returns a list of ancestors. The ancestors are sorted based on their level (ascending). Does not contain the
+     * calling {@link ArchitecturalDesignDecision} itself.
+     *
+     * @return list of ancestors
+     */
     public List<ArchitecturalDesignDecision> getAncestors() {
         List<ArchitecturalDesignDecision> ancestors = Lists.mutable.empty();
         var ancestor = parent;
@@ -78,6 +99,12 @@ public enum ArchitecturalDesignDecision {
         return ancestors;
     }
 
+    /**
+     * Returns the level of the {@link ArchitecturalDesignDecision}. At the top of the taxonomy, the level is 0 and the
+     * level is increasing with the path length to the leaves.
+     *
+     * @return the level
+     */
     public int getLevel() {
         return getAncestors().size();
     }

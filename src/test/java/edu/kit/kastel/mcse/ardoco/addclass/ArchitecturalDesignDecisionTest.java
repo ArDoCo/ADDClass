@@ -169,6 +169,24 @@ class ArchitecturalDesignDecisionTest {
     }
 
     @Test
+    @DisplayName("Test ancestor list retrieval")
+    void getAncestorsTest() {
+        var expectedAncestorsForClass = new ArchitecturalDesignDecision[] { DESIGN_DECISION, EXISTENCE_DECISION, STRUCTURAL_DECISION,
+                ArchitecturalDesignDecision.INTRA_SYSTEMIC, ArchitecturalDesignDecision.CLASS_RELATED };
+        Assertions.assertAll(//
+                () -> Assertions.assertEquals(0, DESIGN_DECISION.getAncestors().size()), //
+                () -> Assertions.assertEquals(0, NO_DESIGN_DECISION.getAncestors().size()), //
+                () -> Assertions.assertEquals(1, EXISTENCE_DECISION.getAncestors().size()), //
+                () -> Assertions.assertEquals(2, STRUCTURAL_DECISION.getAncestors().size()), //
+                () -> Assertions.assertEquals(4, ArchitecturalDesignDecision.COMPONENT.getAncestors().size()), //
+                () -> Assertions.assertEquals(3, ArchitecturalDesignDecision.RELATION.getAncestors().size()), //
+                () -> Assertions.assertEquals(5, ArchitecturalDesignDecision.CLASS.getAncestors().size()), //
+                () -> Assertions.assertEquals(4, ArchitecturalDesignDecision.API.getAncestors().size()), //
+                () -> Assertions.assertArrayEquals(expectedAncestorsForClass, ArchitecturalDesignDecision.CLASS.getAncestors().toArray()) //
+        );
+    }
+
+    @Test
     @DisplayName("Test level calculation")
     void levelTest() {
         Assertions.assertAll(//

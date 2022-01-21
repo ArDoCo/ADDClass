@@ -74,7 +74,7 @@ public enum ArchitecturalDesignDecision {
             ancestors.add(ancestor);
             ancestor = ancestor.parent;
         }
-
+        ancestors.sort((a, b) -> Integer.compare(a.getLevel(), b.getLevel()));
         return ancestors;
     }
 

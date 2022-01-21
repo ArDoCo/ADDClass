@@ -167,4 +167,19 @@ class ArchitecturalDesignDecisionTest {
                 () -> Assertions.assertTrue(ArchitecturalDesignDecision.FRAMEWORK.isContainedIn(EXECUTIVE_DECISION)) //
         );
     }
+
+    @Test
+    @DisplayName("Test level calculation")
+    void levelTest() {
+        Assertions.assertAll(//
+                () -> Assertions.assertEquals(0, DESIGN_DECISION.getLevel()), //
+                () -> Assertions.assertEquals(0, NO_DESIGN_DECISION.getLevel()), //
+                () -> Assertions.assertEquals(1, EXISTENCE_DECISION.getLevel()), //
+                () -> Assertions.assertEquals(2, STRUCTURAL_DECISION.getLevel()), //
+                () -> Assertions.assertEquals(4, ArchitecturalDesignDecision.COMPONENT.getLevel()), //
+                () -> Assertions.assertEquals(3, ArchitecturalDesignDecision.RELATION.getLevel()), //
+                () -> Assertions.assertEquals(5, ArchitecturalDesignDecision.CLASS.getLevel()), //
+                () -> Assertions.assertEquals(4, ArchitecturalDesignDecision.API.getLevel()) //
+        );
+    }
 }

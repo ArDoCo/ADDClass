@@ -1,6 +1,10 @@
 /* Licensed under MIT 2022. */
 package edu.kit.kastel.mcse.ardoco.addclass;
 
+import java.util.List;
+
+import org.eclipse.collections.api.factory.Lists;
+
 /**
  * @author Jan Keim
  *
@@ -61,6 +65,21 @@ public enum ArchitecturalDesignDecision {
             ancestor = ancestor.parent;
         }
         return false;
+    }
+
+    public List<ArchitecturalDesignDecision> getAncestors() {
+        List<ArchitecturalDesignDecision> ancestors = Lists.mutable.empty();
+        var ancestor = parent;
+        while (ancestor != null) {
+            ancestors.add(ancestor);
+            ancestor = ancestor.parent;
+        }
+
+        return ancestors;
+    }
+
+    public int getLevel() {
+        return getAncestors().size();
     }
 
 }

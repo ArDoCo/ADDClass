@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.deeplearning4j.bagofwords.vectorizer.BagOfWordsVectorizer;
@@ -27,7 +26,7 @@ public class ADDClass {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        var dataLocalPath = "C:\\Users\\Jan Keim\\dl4j-examples-data\\dl4j-examples\\nlp";
+        var dataLocalPath = "src/main/resources/nlp";
         // Gets Path to Text file
         String filePath = new File(dataLocalPath, "raw_sentences.txt").getAbsolutePath();
 
@@ -55,6 +54,7 @@ public class ADDClass {
         // Prints out the closest 10 words to a given word. An example on what to do with these Word Vectors.
         var wordToCheck = "night";
         var word2ToCheck = "day";
+        var word3ToCheck = "time";
 
         log.info("Closest Words:");
         Collection<String> lst = vec.wordsNearestSum(wordToCheck, 10);
@@ -67,10 +67,15 @@ public class ADDClass {
         var bow = new BagOfWordsVectorizer.Builder().setMinWordFrequency(1).setStopWords(new ArrayList<>()).setIterator(iter).setTokenizerFactory(t).build();
         log.info("Fitting BOW model....");
         bow.fit();
+
         var wordBow = bow.transform(wordToCheck);
         var word2Bow = bow.transform(word2ToCheck);
+        var word3Bow = bow.transform(word3ToCheck);
         cs = Transforms.cosineSim(wordBow, word2Bow);
-        log.info("Similarity (BOW): {}", cs);
+
+        log.info("Similarity (BOW) '{}'-'{}': {}", wordToCheck, word2ToCheck, cs);
+        cs = Transforms.cosineSim(wordBow, word3Bow);
+        log.info("Similarity (BOW) '{}'-'{}': {}", wordToCheck, word3ToCheck, cs);
         cs = Transforms.cosineSim(wordBow, wordBow);
         log.info("Self-Similarity (BOW): {}", cs);
 

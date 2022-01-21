@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.deeplearning4j.bagofwords.vectorizer.BagOfWordsVectorizer;
@@ -17,6 +18,10 @@ import org.deeplearning4j.text.tokenization.tokenizerfactory.DefaultTokenizerFac
 import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
 import org.nd4j.linalg.ops.transforms.Transforms;
 
+/**
+ * @author Jan Keim
+ *
+ */
 public class ADDClass {
     private static Logger log = LogManager.getLogger(ADDClass.class);
 

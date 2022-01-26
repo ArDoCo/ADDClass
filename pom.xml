@@ -20,6 +20,10 @@
     <error-prone.version>2.10.0</error-prone.version>
 
     <argLine>-Xmx4g -Xss256m</argLine>
+
+    <sonar.organization>ardoco</sonar.organization>
+    <sonar.projectKey>ArDoCo_ADDClass</sonar.projectKey>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
 
   <dependencies>
@@ -66,7 +70,7 @@
 	  <artifactId>nd4j-native-platform</artifactId>
 	  <version>${deeplearning4j.version}</version>
 	</dependency>
-	
+
 	<dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>

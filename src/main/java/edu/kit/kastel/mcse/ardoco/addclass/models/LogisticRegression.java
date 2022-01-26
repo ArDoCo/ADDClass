@@ -133,7 +133,7 @@ public class LogisticRegression {
     public void train(DataSetIterator trainingData) {
         createModel();
         model.init();
-        // model.setListeners(new ScoreIterationListener(100));
+        model.setListeners(new ScoreIterationListener(100));
         if (logger.isInfoEnabled()) {
             logger.info("Total num of params: {}", model.numParams());
         }

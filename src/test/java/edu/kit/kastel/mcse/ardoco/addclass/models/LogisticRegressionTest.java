@@ -30,6 +30,7 @@ import org.deeplearning4j.datasets.datavec.RecordReaderDataSetIterator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.dataset.api.preprocessor.DataNormalization;
 import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
@@ -43,6 +44,7 @@ import edu.kit.kastel.mcse.ardoco.addclass.models.LogisticRegression.LogisticReg
 class LogisticRegressionTest {
     private static final Logger logger = LogManager.getLogger(LogisticRegressionTest.class);
 
+    @DisabledIfEnvironmentVariable(matches = "true", named = "CI")
     @Test
     @DisplayName("Test LogisticRegression with MNIST")
     void mnistTest() throws Exception {

@@ -1,4 +1,4 @@
-package edu.kit.kastel.mcse.ardoco.addclass.classifiers;
+package edu.kit.kastel.mcse.ardoco.addclass.models;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.compress.archivers.ArchiveEntry;
@@ -31,6 +33,12 @@ import org.junit.jupiter.api.Test;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.dataset.api.preprocessor.DataNormalization;
 import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
+import org.nd4j.linalg.learning.config.IUpdater;
+import org.nd4j.linalg.learning.config.Nesterovs;
+import org.nd4j.linalg.schedule.MapSchedule;
+import org.nd4j.linalg.schedule.ScheduleType;
+
+import edu.kit.kastel.mcse.ardoco.addclass.models.LogisticRegression.LogisticRegressionBuilder;
 
 class LogisticRegressionTest {
     private static final Logger logger = LogManager.getLogger(LogisticRegressionTest.class);
@@ -57,7 +65,6 @@ class LogisticRegressionTest {
         // vectorization of train data
         File trainData = new File(path + "training");
         FileSplit trainSplit = new FileSplit(trainData, NativeImageLoader.ALLOWED_FORMATS, randNumGen);
-        // use parent directory name as the image label
         ParentPathLabelGenerator labelMaker = new ParentPathLabelGenerator();
         ImageRecordReader trainRR = new ImageRecordReader(height, width, channels, labelMaker);
         trainRR.initialize(trainSplit);
@@ -73,12 +80,11 @@ class LogisticRegressionTest {
         ImageRecordReader testRR = new ImageRecordReader(height, width, channels, labelMaker);
         testRR.initialize(testSplit);
         DataSetIterator test = new RecordReaderDataSetIterator(testRR, batchSize, 1, outputClasses);
-        // same normalization for better results
         test.setPreProcessor(imageScaler);
 
         logger.info("Create and training network...");
-        var logisticRegression = new LogisticRegression(); // TODO
-        logisticRegression.train(train, test);
+        var logisticRegression = new LogisticRegressionBuilder(1, 10, 28, 28, 1).withUpdater(getUpdater()).build();
+        logisticRegression.train(train);
 
         var eval = logisticRegression.evaluate(test);
 
@@ -87,6 +93,17 @@ class LogisticRegressionTest {
                 () -> Assertions.assertNotNull(eval) //
         );
 
+    }
+
+    private IUpdater getUpdater() {
+        Map<Integer, Double> learningRateSchedule = new HashMap<>();
+        learningRateSchedule.put(0, 0.06);
+        learningRateSchedule.put(200, 0.05);
+        learningRateSchedule.put(600, 0.028);
+        learningRateSchedule.put(800, 0.0060);
+        learningRateSchedule.put(1000, 0.001);
+        var updater = new Nesterovs(new MapSchedule(ScheduleType.ITERATION, learningRateSchedule));
+        return updater;
     }
 
     private static String getMnistData(final String basePath, final String dataUrl) {

@@ -13,7 +13,7 @@
   <description>Classifies Architectural Design Decision</description>
 
   <properties>
-  	<deeplearning4j.version>1.0.0-M2</deeplearning4j.version>
+  	<deeplearning4j.version>1.0.0-M2.1</deeplearning4j.version>
     <eclipse-collections.version>11.1.0</eclipse-collections.version>
     <log4j.version>2.18.0</log4j.version>
     <spotless.version>2.24.1</spotless.version>
